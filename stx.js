@@ -12,40 +12,79 @@ var click = true;
 var width = 200;
 var height = 200;
 
+var canvasX;
+
 
 function initControl() {
 
 	canvas.addEventListener("mousedown", doMouseDown, false);
 	document.body.addEventListener("mouseup", mouseUp, false);
+	canvas.addEventListener('click', function() { }, false);
 
 	function mouseUp() {
 	  click = false;
-	  rotate('L');
+	  rotate(false);
 	}
 	function doMouseDown (event) {
 		click = true;
-		var canvasX;
-		rotate('R');
+		rotate(true);
 	}
-
 	function mouseX (event) {
 	    // event.preventDefault();
+	    canvasX = event.pageX;
+	    //=========360 Controller============//
+	    canvas.addEventListener('click', function(event){
+	    	var clickPosIndex = canvasX;
+	    	console.log("click Posititon = " + clickPosIndex);
+	    });
+	    currentFrame++;
+	    var mIndex = canvasX;
+	    console.log("mIndex = " + mIndex);
+	    var preX = canvasX;
 
-	    var canvasX = event.pageX;
-	    console.log(canvasX);
+	    // currentFrame --;
 	    return canvasX;
 	}
-	function rotate(X) {
+
+	
+	function rotate(mouse) {
 	    ctx.clearRect(0, 0, width, height);
 	    ctx.drawImage(image, 0, height * currentFrame, width, height, 0, 0, width, height);
-
-	    if (X === 'R'){
+	    // var Xindex;
+	    // ROTATE RIGHT
+	    if (mouse === true){
 	    	canvas.addEventListener("mousemove",mouseX, false);
-	    	currentFrame = 0;
+
+	    	if (currentFrame === 35) {
+	    		currentFrame = 0;
+	    	}
 	    	mouseX();
-	    } if (X === 'L') {
+	    	//=========PSEUDO 360 Controller============//
+
+	    	// Xindex -= currentFrame;
+	    	// currentFrame --;
+
+	    	//X-Coord-Mouse + Rotational Logic Here...
+
+	    	// Listen for MouseDown
+	    	// if (MouseDoown == true)
+	    	// 	currentXcoord = mouse@canvas-X-pos;
+	    	// 	Listen for mouseMove;
+
+	    	// var DELTA = X0-X1 (change in mouse position)
+
+	    	// 	if (DELTA < 0) {
+	    	// 		G0-Right->;
+	    	// 		X1 = X0;
+	    	// 	} if (DELTA > 0) {
+	    	// 			<-GO-Left;
+	    	// 			X1 = X0;
+	    	// 		}
+	
+	    	// ====== MOUSE-UP ====//
+	    } if (mouse === false) {
+	    	console.log("ending CanvasX = " + canvasX);
 	    	canvas.removeEventListener("mousemove",mouseX, false);
-				currentFrame = 18;
 				mouseX();
 				}
 	};

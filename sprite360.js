@@ -3,7 +3,7 @@ window.addEventListener('load', init, false);
 var image = new Image()
     image.src = 'cascadeR.png';
 var frames = 35;
-var currentFrame = 0;
+var currentFrame = 2;
 
 var canvasX;
 var canvasY;
