@@ -1,14 +1,23 @@
 <!DOCTYPE html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>Animating Sprites In HTML5 Canvas | onlyWebPro.com</title>
-    </head>
-    <body>
-        <canvas id="myCanvas" width="200" height="200">
-            <!-- Insert fallback content here -->
-            Sorry, your browser doesn't support canvas technology
-        </canvas>
-        <script type="text/javascript" src="scripts.js"></script>
-        
-    </body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <title>Animating Sprites In HTML5 Canvas | onlyWebPro.com</title>
+  </head>
+  <body onload="initControl()">
+  <!--     <body onload="init()"> -->
+  <canvas id="myCanvas" width="200" height="200"></canvas>
+  <div>
+    
+    <canvas id="clickCanvas" width="200" height="200">
+
+    </canvas>
+  </div>
+  
+
+              <!-- HELMET LOOP -->
+<script type="text/javascript" src="helmetLoop.js"></script>
+            <!-- 360 CONTROLLER -->
+  <script type="text/javascript" src="stx.js"></script>
+  </body>
 </html>
