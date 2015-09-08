@@ -1,0 +1,61 @@
+stx.js:75 DELTA = 10////=======
+
+stx.js:76 DIFF = -10
+stx.js:84 chP#1 => 1
+
+stx.js:100 BRAVO => 104
+stx.js:68 X[1] = 115
+
+stx.js:75 DELTA[0] = 11///=======
+stx.js:76 DIFF = -11
+
+
+stx.js:100 BRAVO => 104
+stx.js:68 X[1] = 114//*****
+
+stx.js:75 DELTA[1] = 10///=======
+stx.js:76 DIFF = -10
+
+
+var DIST = DELTA[0] - DELTA[1];
+
+if (DIST > 0) {
+	currentFrame--;
+} if (DIST < 0) {
+	currentFrame++;
+}
+
+
+
+
+stx.js:100 BRAVO => 104
+stx.js:68 X[1] = 113
+
+stx.js:75 DELTA = 9
+stx.js:76 DIFF = -9
+stx.js:84 chP#1 => 1
+stx.js:100 BRAVO => 104
+stx.js:68 X[1] = 111
+stx.js:75 DELTA = 7
+stx.js:76 DIFF = -7
+
+
+
+
+
+//X-Coord-Mouse + Rotational Logic Here...
+
+// Listen for MouseDown
+// if (MouseDoown == true)
+// 	currentXcoord = mouse@canvas-X-pos;
+// 	Listen for mouseMove;
+
+// var DELTA = X0-X1 (change in mouse position)
+
+// 	if (DELTA < 0) {
+// 		G0-Right->;
+// 		X1 = X0;
+// 	} if (DELTA > 0) {
+// 			<-GO-Left;
+// 			X1 = X0;
+// 		}
