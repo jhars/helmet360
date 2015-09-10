@@ -1,5 +1,5 @@
 var imageHelmet = new Image();
-    imageHelmet.src = 'cascadeR.png';
+    imageHelmet.src = 'images/cascadeR.png';
 var framesHelmet = 35;
 var currentFrameHelmet = 0;
 var width = 200;
@@ -17,8 +17,9 @@ var draw = function(){
     ctx.clearRect(0, 0, width, height);
     ctx.drawImage(imageHelmet, 0, height * currentFrameHelmet, width, height, 0, 0, width, height);
     
-    if (currentFrameHelmet == frames) {
-    currentFrameHelmet = 0;
+    if (currentFrameHelmet === framesHelmet) {
+    currentFrameHelmet = 1;
+    currentFrameHelmet++;
     } else {
     currentFrameHelmet++;
     }

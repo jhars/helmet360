@@ -1,17 +1,23 @@
-window.addEventListener('load', initControl, false);
+// window.addEventListener('load', initControl, false);
 
 var canvas = document.getElementById("clickCanvas");
 var ctx = canvas.getContext("2d");
 
 var image = new Image()
-image.src = 'cascadeR.png';
+image.src = '../images/cascadeR.png';
 
 var frames = 36;
-var bottomFrame = 1;
+var bottomFrame = 0;
+var currentFrame;
 var currentFrame = bottomFrame;
 var click = false;
 var width = 200;
 var height = 200;
+var B;
+
+ctx.clearRect(0, 0, width, height);
+ctx.drawImage(image, 0, height * currentFrame, width, height, 0, 0, width, height);
+
 
 
 
@@ -20,7 +26,8 @@ function initControl() {
 	var X = [];
 	var DELTA; 
 	var ALPHA;
-	var ALPHA2;
+	// var ALPHA2 =
+
 
 	canvas.addEventListener("mousedown", doMouseDown, false);
 
@@ -32,7 +39,7 @@ function initControl() {
 	};	
 
 	function mouseUp(event) {
-		document.body.removeEventListener("mouseup", mouseUp, false);
+		// document.body.removeEventListener("mouseup", mouseUp, false);
 	  canvas.removeEventListener("mousemove",mouseX, false);
 	  console.log("alpha2 -> " + ALPHA2);
 
@@ -48,34 +55,29 @@ function initControl() {
 	  	B = ALPHA;
 	  	console.log("A - B = " + (A - B));
 
-	  if (A != B){
+	  // if (A != B){
 	  			if (A < B){
 	  	  		// ALPHA++;
 	  	  		if (currentFrame > frames ) {
 	  	  			currentFrame = bottomFrame;
 	  	  		} currentFrame++;
-	  	  	} 
-
+	  	  	} console.log("currentFrame1 = " + currentFrame)
 	  	  	if (A > B) {
-	  	  		// ALPHA = -ALPHA;
 	  	  		if (currentFrame < bottomFrame ) {
 	  	  			currentFrame = frames;
 	  	  		} currentFrame--;
 	  	  		console.log("ALPHA06 =>" + ALPHA);
-	  	  		// DELTA = currentFrame;
-	  	  	} 
-	  	  	// A = B;
-	  	  	var ALPHA2 = ALPHA;
+	  	  	} console.log("currentFrame2 = " + currentFrame)
+	  	  	var ALPHA2 = ALPHA;	
+	  	  	console.log("currentFrame3 = " + currentFrame)
 	  	  	console.log("ALPHA##2 => " + ALPHA);
+	  	  	ctx.clearRect(0, 0, width, height);
+	  	  	ctx.drawImage(image, 0, height * currentFrame, width, height, 0, 0, width, height);
+	  	  	console.log("alpha2 -> " + ALPHA2);
+	  	  	//WHATS THIS???
+	  	  	X[1] = X[0];////
+	  // }
 
-
-	  	  	X[1] = X[0];
-	  }
-
-	  	ctx.clearRect(0, 0, width, height);
-	  	ctx.drawImage(image, 0, height * currentFrame, width, height, 0, 0, width, height);
-
-	    // return canvasX;
 	}
 
 }
