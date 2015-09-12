@@ -17,32 +17,26 @@ var B;
 
 ctx.clearRect(0, 0, width, height);
 ctx.drawImage(image, 0, height * currentFrame, width, height, 0, 0, width, height);
-
-
+// ??WHy currentFram * height??
 
 
 function initControl() {
-
 	var X = [];
 	var DELTA; 
 	var ALPHA;
 	// var ALPHA2 =
-
-
 	canvas.addEventListener("mousedown", doMouseDown, false);
 
 	function doMouseDown (event) {
 		canvas.addEventListener("mousemove",mouseX, false);
 		document.body.addEventListener("mouseup", mouseUp, false);
 		X[0] = event.pageX;//set initial X == currentMouse Location
-
 	};	
 
 	function mouseUp(event) {
 		// document.body.removeEventListener("mouseup", mouseUp, false);
 	  canvas.removeEventListener("mousemove",mouseX, false);
 	  console.log("alpha2 -> " + ALPHA2);
-
 	};
 
 	function mouseX (event) {
@@ -54,7 +48,6 @@ function initControl() {
 	  	ALPHA = Math.abs(DIFF);
 	  	B = ALPHA;
 	  	console.log("A - B = " + (A - B));
-
 	  // if (A != B){
 	  			if (A < B){
 	  	  		// ALPHA++;
@@ -63,7 +56,7 @@ function initControl() {
 	  	  		} currentFrame++;
 	  	  	} console.log("currentFrame1 = " + currentFrame)
 	  	  	if (A > B) {
-	  	  		if (currentFrame < bottomFrame ) {
+	  	  		if (currentFrame < bottomFrame ) {//or TRY 1 here...> see helmetLoop
 	  	  			currentFrame = frames;
 	  	  		} currentFrame--;
 	  	  		console.log("ALPHA06 =>" + ALPHA);

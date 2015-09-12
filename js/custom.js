@@ -1,4 +1,4 @@
-var chin, mask, visor, panel, strap, wrap;
+
 
 var chinSources = {
   black: '../images/layers/side/chin-guards/chin-guard-black.png',
@@ -22,97 +22,103 @@ var visorSources = {
 var wrapSources = {
   carbon: '../images/layers/side/wraps/wrap-carbon.png',
   black: '../images/layers/side/wraps/wrap-black.png',
-  sunrise: '../images/layers/side/wraps/sun-rise.png',
+  sunrise: '../images/layers/side/wraps/wrap-sun-rise.png',
   white: '../images/layers/side/wraps/wrap-white.png'
 };
 var panelSources = {
   green: '../images/layers/side/back-panel/back-panel-neon-green.png',
   purple: '../images/layers/side/back-panel/back-panel-purple.png',
-  green: '../images/layers/side/back-panel/back-panel-SunShine.png'
+  sunrise: '../images/layers/side/back-panel/back-panel-SunShine.png'
 };
 var strapSources = {
   black: '../images/layers/side/straps/chin-strap-black.png',
   white: '../images/layers/side/straps/chin-strap-white.png'
 };
 
+var sources = {
+  BASE: '../images/crShell_WHITE.png',
+  template: '../images/TEMPLATE.png',
+  black: '../images/BaseBlack.png',
+  chinstrap: '../images/layers/side/straps/chin-strap-white.png'
+};
 
+//============IMAGE LOADER=================//
+var images = {};
+function loadImages(sources, callback) {
 
-
-
-
-      //============IMAGE LOADER=================//
-      var images = {};
-      function loadImages(sources, callback) {
-
-        var loadedImages = 0;
-        var numImages = 0;
-        // get num of sources
-        for(var src in sources) {
-          numImages++;
-        }
-        for(var src in sources) {
-          images[src] = new Image();
-          images[src].onload = function() {
-            if(++loadedImages >= numImages) {
-              callback(images);
-            }
-          };
-          images[src].src = sources[src];
-        }
+  var loadedImages = 0;
+  var numImages = 0;
+  // get num of sources
+  for(var src in sources) {
+    numImages++;
+  }
+  for(var src in sources) {
+    images[src] = new Image();
+    images[src].onload = function() {
+      if(++loadedImages >= numImages) {
+        callback(images);
       }
+    };
+    images[src].src = sources[src];
+  }
+}
 
-      var canvas = document.getElementById('customHelmet');
-      var context = canvas.getContext('2d');
+var canvas = document.getElementById('customHelmet');
+var context = canvas.getContext('2d');
 
-      var sources = {
-        BASE: '../images/crShell_WHITE.png',
-        template: '../images/TEMPLATE.png',
-        black: '../images/BaseBlack.png',
-        chinstrap: '../images/layers/side/straps/chin-strap-white.png'
-      };
+loadImages(sources, function(images) {
+  context.drawImage(images.black, 0, 0, canvas.width, canvas.height),
+  context.drawImage(images.BASE, 0, 0, canvas.width, canvas.height)
+  // BASE LAYERS
+});
 
-      loadImages(sources, function(images) {
-        context.drawImage(images.black, 0, 0, canvas.width, canvas.height),
-        context.drawImage(images.BASE, 0, 0, canvas.width, canvas.height)
-        // BASE LAYERS
-      });
-      document.getElementById('wrapUI').addEventListener('click', function() {
-        // canvas.removeEventListener("mousemove",mouseX, false);
-        wrap = true;
-      });
-      document.getElementById('chinUI').addEventListener('click', function() {
-        // canvas.removeEventListener("mousemove",mouseX, false);
-        chin = true;
-      });
-      document.getElementById('maskUI').addEventListener('click', function() {
-        // canvas.removeEventListener("mousemove",mouseX, false);
-        mask = true;
-      });
-      document.getElementById('visorUI').addEventListener('click', function() {
-        // canvas.removeEventListener("mousemove",mouseX, false);
-        visor = true;
-      });
-      document.getElementById('panelUI').addEventListener('click', function() {
-        // canvas.removeEventListener("mousemove",mouseX, false);
-        panel = true;
-      });
-      document.getElementById('strapUI').addEventListener('click', function() {
-        // canvas.removeEventListener("mousemove",mouseX, false);
-        strap = true;
-      });
+document.getElementById('wrapUI').addEventListener('click', function() {
+  // canvas.removeEventListener("mousemove",mouseX, false);
+  wrap = true;
+});
+document.getElementById('chinUI').addEventListener('click', function() {
+  // canvas.removeEventListener("mousemove",mouseX, false);
+  chin = true;
+});
+document.getElementById('maskUI').addEventListener('click', function() {
+  // canvas.removeEventListener("mousemove",mouseX, false);
+  mask = true;
+});
+document.getElementById('visorUI').addEventListener('click', function() {
+  // canvas.removeEventListener("mousemove",mouseX, false);
+  visor = true;
+});
+document.getElementById('panelUI').addEventListener('click', function() {
+  // canvas.removeEventListener("mousemove",mouseX, false);
+  panel = true;
+});
+document.getElementById('strapUI').addEventListener('click', function() {
+  // canvas.removeEventListener("mousemove",mouseX, false);
+  strap = true;
+});
 
+document.getElementById('customHelmet').addEventListener('click', function() {
+  context.drawImage(images.BASE, 0, 0, canvas.width, canvas.height);
+});
 
-      document.getElementById('customHelmet').addEventListener('click', function() {
-        context.drawImage(images.BASE, 0, 0, canvas.width, canvas.height);
-      });
-
+var chin, mask, visor, panel, strap, wrap;
 
 //============= BUTTON/RECTANGLE =================//
 
 
+//[[TEMPLATE]]
+var buttonTemplate = document.getElementById('btnTEMPLATE');
+var btn = buttonTemplate.getContext('2d');
+btn.beginPath();
+btn.rect(0, 0, canvas.width, canvas.height);
+btn.fillStyle = 'white';
+btn.fill();
+document.getElementById('btnTEMPLATE').addEventListener('click', function() {
+  context.drawImage(images.template, 0, 0, canvas.width, canvas.height)
+});
+
 
 //[[[RED]]]
-
 var buttonRed = document.getElementById('btnRed');
 var btn = buttonRed.getContext('2d');
 btn.beginPath();
@@ -125,20 +131,24 @@ document.getElementById('btnRed').addEventListener('click', function() {
 });
 
 //[[[GREEN]]]
-
 var buttonGreen = document.getElementById('btnGreen');
 var btn = buttonGreen.getContext('2d');
 btn.beginPath();
 btn.rect(0, 0, canvas.width, canvas.height);
-btn.fillStyle = 'Green';
+btn.fillStyle = 'green';
 btn.fill();
 document.getElementById('btnGreen').addEventListener('click', function() {
-  // context.drawImage(images.shellBLUE, 0, 0, canvas.width, canvas.height);
-  //currentFrame = context. ??
+  var panelGREEN = new Image();
+  panelGREEN.src = panelSources.green;
+
+  var visorGREEN = new Image();
+  visorGREEN.src = visorSources.green;
+
+  context.drawImage(panelGREEN, 0, 0, canvas.width, canvas.height);
+  context.drawImage(visorGREEN, 0, 0, canvas.width, canvas.height);
 });
 
 //[[GOLD]]
-
 var buttonGold = document.getElementById('btnGold');
 var btn = buttonGold.getContext('2d');
 btn.beginPath();
@@ -155,7 +165,6 @@ document.getElementById('btnGold').addEventListener('click', function() {
 });
 
 //[[PURPLE]]
-
 var buttonPurple = document.getElementById('btnPurple');
 var btn = buttonPurple.getContext('2d');
 btn.beginPath();
@@ -163,15 +172,15 @@ btn.rect(0, 0, canvas.width, canvas.height);
 btn.fillStyle = 'purple';
 btn.fill();
 document.getElementById('btnPurple').addEventListener('click', function() {
-  // context.drawImage(images.shellBLUE, 0, 0, canvas.width, canvas.height);
+
+  var maskPURPLE = new Image();
+  maskPURPLE.src = maskSources.purple;
+
+  context.drawImage(maskPURPLE, 0, 0, canvas.width, canvas.height);
   //currentFrame = context. ??
 });
 
-
-
-
 //[[[ORANGE]]]
-
 var buttonOrange = document.getElementById('btnOrange');
 var orange = buttonOrange.getContext('2d');
 orange.beginPath();
@@ -179,11 +188,19 @@ orange.rect(0, 0, canvas.width, canvas.height);
 orange.fillStyle = 'orange';
 orange.fill();
 document.getElementById('btnOrange').addEventListener('click', function() {
-  // context.drawImage(images.shellORANGE, 0, 0, canvas.width, canvas.height);
+
+  var maskORANGE = new Image();
+  maskORANGE.src = wrapSources.sunrise;
+
+  var panelORANGE = new Image();
+  panelORANGE.src = panelSources.sunrise;
+
+  context.drawImage(panelORANGE, 0, 0, canvas.width, canvas.height);
+  context.drawImage(maskORANGE, 0, 0, canvas.width, canvas.height);
+  //currentFrame = context. ??
 });
 
 //[[BLACK]]
-
 var buttonBlack = document.getElementById('btnBlack');
 var black = buttonBlack.getContext('2d');
 black.beginPath();
@@ -195,20 +212,7 @@ document.getElementById('btnBlack').addEventListener('click', function() {
   //currentFrame = context. ??
 });
 
-//[[TEMPLATE]]
-
-var buttonTemplate = document.getElementById('btnTEMPLATE');
-var btn = buttonTemplate.getContext('2d');
-btn.beginPath();
-btn.rect(0, 0, canvas.width, canvas.height);
-btn.fillStyle = 'white';
-btn.fill();
-document.getElementById('btnTEMPLATE').addEventListener('click', function() {
-  context.drawImage(images.template, 0, 0, canvas.width, canvas.height)
-});
-
-// // [[CHIN-STRAP]]
-
+//[[CHIN-STRAP]]
 var buttonChinWhite = document.getElementById('btnChinWhite');
 var black = buttonChinWhite.getContext('2d');
 black.beginPath();
@@ -218,48 +222,6 @@ black.fill();
 document.getElementById('btnChinWhite').addEventListener('click', function() {
   context.drawImage(images.chinstrap, 0, 0, canvas.width, canvas.height);
 });
-
-// [[GREEN]]
-
-// var buttonGreen = document.getElementById('btnGreen');
-// var btn = buttonGreen.getContext('2d');
-// btn.beginPath();
-// btn.rect(0, 0, canvas.width, canvas.height);
-// btn.fillStyle = 'green';
-// btn.fill();
-// // document.getElementById('btnTEMPLATE').addEventListener('click', function() {
-// //   context.drawImage(images.template, 0, 0, canvas.width, canvas.height)
-// // });
-
-// [[PURPLE]]
-
-// var buttonPurple = document.getElementById('btnPurple');
-// var btn = buttonPurple.getContext('2d');
-// btn.beginPath();
-// btn.rect(0, 0, canvas.width, canvas.height);
-// btn.fillStyle = 'purple';
-// btn.fill();
-// // document.getElementById('btnTEMPLATE').addEventListener('click', function() {
-// //   // context.drawImage(images.template, 0, 0, canvas.width, canvas.height)
-// // });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // //[[[WHITE]]]
 
@@ -277,25 +239,6 @@ document.getElementById('btnChinWhite').addEventListener('click', function() {
 //   //currentFrame = context. ??
 // });
 
-
-
-
-
-// //[[[GREEN]]]
-
-// var buttonShell = document.getElementById('btnBlue');
-// var btn = buttonShell.getContext('2d');
-// btn.beginPath();
-// btn.rect(0, 0, canvas.width, canvas.height);
-// btn.fillStyle = 'blue';
-// btn.fill();
-// btn.lineWidth = 7;
-// btn.strokeStyle = 'black';
-// btn.stroke();
-// document.getElementById('btnBlue').addEventListener('click', function() {
-//   context.drawImage(images.shellBLUE, 0, 0, canvas.width, canvas.height);
-//   //currentFrame = context. ??
-// });
 
 // //[[[CHROME]]]
 
